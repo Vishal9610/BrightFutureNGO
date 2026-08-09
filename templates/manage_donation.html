@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Manage Donation</title>
+        <link rel="stylesheet" href="../static/css/admin.css" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <h2>Bright Future</h2>
+      <a href="/dashboard">🏠 Dashboard</a>
+      <a href="/gallery">🖼 Gallery</a>
+      <a href="/gallery/upload">📤 Manage Gallery</a>
+      <a href="/messages">View Messages</a>
+      <a href="/messages">📞 Contact</a>
+      <li>
+        <a href="/manage-news"> 📰 Manage News </a>
+      </li>
+      <li><a href="/manage-team">Manage Team</a></li>
+      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+      <a href="/logout">🚪 Logout</a>
+    </div>
+    
+    <div class="main">
+      <h1>Dashboard</h1>
+      <p>Welcome Admin</p>
+
+      <hr />
+
+    <h2>Manage Donation</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      <label>UPI ID</label>
+
+      <br />
+
+      <input type="text" name="upi_id" value="{{ donation[1] }}" />
+
+      <br /><br />
+
+      <label>Account Name</label>
+
+      <br />
+
+      <input type="text" name="account_name" value="{{ donation[2] }}" />
+
+      <br /><br />
+
+      <label>Bank Name</label>
+
+      <br />
+
+      <input type="text" name="bank_name" value="{{ donation[3] }}" />
+
+      <br /><br />
+
+      <label>Account Number</label>
+
+      <br />
+
+      <input type="text" name="account_number" value="{{ donation[4] }}" />
+
+      <br /><br />
+
+      <label>IFSC Code</label>
+
+      <br />
+
+      <input type="text" name="ifsc_code" value="{{ donation[5] }}" />
+
+      <br /><br />
+<label>QR Code</label>
+<br>
+
+<input type="file" name="qr_code">
+
+<br><br>
+
+Current QR Code:
+
+<br>
+
+<img src="{{ url_for('static', filename='images/' + donation[6]) }}"
+     width="150">
+      <br /><br />
+
+      <button>Update</button>
+    </form>
+  </body>
+</html>

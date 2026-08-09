@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Bright Future Foundation</title>
+
+    <link rel="stylesheet" href="../static/css/style.css" />
+  </head>
+
+  <body>
+    <!-- Navbar Start -->
+
+    <nav>
+      <div class="logo">NGO Management System</div>
+
+      <ul>
+        <li><a href="#home">Home</a></li>
+
+        <li><a href="/about">About</a></li>
+
+        <li><a href="/programs">Programs</a></li>
+
+        <li><a href="/gallery">Gallery</a></li>
+
+        <li><a href="/donate">Donate</a></li>
+
+        <li><a href="/contact">Contact</a></li>
+
+        <li><a href="/team">Our Team</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Every Child Deserves an Education</h1>
+
+        <p>
+          Bright Future Foundation provides free education, books, school
+          supplies and learning opportunities for street children.
+        </p>
+
+        <a href="/learn-more" class="btn">Learn More</a>
+
+        <a href="/donate" class="btn btn2">Donate Now</a>
+      </div>
+    </section>
+
+    <!-- Impact Counter Section -->
+
+    <section class="impact">
+      <h2>Our Impact</h2>
+
+      <p>Making a difference in children's lives every day.</p>
+
+      <div class="counter-container">
+        <div class="counter-box">
+          <h1 class="counter" data-target="500">0</h1>
+          <h3>Children Educated</h3>
+        </div>
+
+        <div class="counter-box">
+          <h1 class="counter" data-target="1200">0</h1>
+          <h3>Books Distributed</h3>
+        </div>
+
+        <div class="counter-box">
+          <h1 class="counter" data-target="50">0</h1>
+          <h3>Teachers</h3>
+        </div>
+
+        <div class="counter-box">
+          <h1 class="counter" data-target="15">0</h1>
+          <h3>Learning Centers</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+
+    <section class="testimonials">
+      <h2>What People Say</h2>
+
+      <p>Voices from our community</p>
+
+      <div class="slider">
+        <div class="slide active">
+          <img src="{{ url_for('static', filename='images/user1.png') }}" />
+
+          <p>
+            "Bright Future Foundation changed my child's life through
+            education."
+          </p>
+
+          <h3>Rahul Kumar</h3>
+        </div>
+
+        <div class="slide">
+          <img src="{{ url_for('static', filename='images/user2.png') }}" />
+
+          <p>
+            "The teachers are caring and the learning environment is wonderful."
+          </p>
+
+          <h3>Priya Singh</h3>
+        </div>
+
+        <div class="slide">
+          <img src="{{ url_for('static', filename='images/user3.png')}}" />
+
+          <p>"Thanks to this NGO, I am now studying in school."</p>
+
+          <h3>Aman</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest News -->
+
+    <section class="news">
+      <h2>Latest News & Announcements</h2>
+
+      <div class="news-container">
+        {% for item in news %}
+
+        <div class="news-card">
+          <span>{{ item[3] }}</span>
+
+          <h3>{{ item[1] }}</h3>
+
+          <p>{{ item[2] }}</p>
+        </div>
+
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+
+    <section class="events">
+      <h2>Upcoming Events</h2>
+
+      <p>Join our upcoming activities and help make a difference.</p>
+
+      <div class="event-container">
+        <div class="event-card">
+          <div class="date">
+            <h3>15</h3>
+            <span>AUG</span>
+          </div>
+
+          <div class="event-details">
+            <h3>Independence Day Celebration</h3>
+
+            <p>
+              Celebration with children, cultural programs and free study kits.
+            </p>
+
+            <a href="/contact" class="event-btn">Join Event</a>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="date">
+            <h3>20</h3>
+            <span>AUG</span>
+          </div>
+
+          <div class="event-details">
+            <h3>Book Distribution Camp</h3>
+
+            <p>
+              Free books and notebooks will be distributed to needy children.
+            </p>
+
+            <a href="/contact" class="event-btn">Register</a>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="date">
+            <h3>01</h3>
+            <span>SEP</span>
+          </div>
+
+          <div class="event-details">
+            <h3>Health Check-up Camp</h3>
+
+            <p>
+              Free medical check-up and health awareness program for children.
+            </p>
+
+            <a href="/contact" class="event-btn">Register</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+
+    <section class="faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <p>Find answers to common questions about our NGO.</p>
+
+      <div class="faq-item">
+        <button class="faq-question">How can I donate?</button>
+
+        <div class="faq-answer">
+          <p>
+            You can donate using the UPI ID or QR Code available on the Donate
+            page.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Who can join the NGO?</button>
+
+        <div class="faq-answer">
+          <p>
+            Any child in need of education and support can participate in our
+            programs.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Can I become a donor?</button>
+
+        <div class="faq-answer">
+          <p>
+            Yes. Individuals, companies, and organizations can support our
+            mission.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How can I contact the NGO?</button>
+
+        <div class="faq-answer">
+          <p>
+            Visit the Contact page and send us your message. We will respond as
+            soon as possible.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+
+    <section class="partners">
+      <h2>Our Partners & Supporters</h2>
+
+      <p>Together we are building a brighter future.</p>
+
+      <div class="logo-slider">
+        <div class="logo-track">
+          <img
+            src="{{ url_for('static', filename='images/vishal_photo_2.jpg') }}"
+          />
+          <img
+            src="{{ url_for('static', filename='images/IMG20251220150858.jpg') }}"
+          />
+          <img src="{{ url_for('static', filename='images/logo3.png') }}" />
+          <img src="{{ url_for('static', filename='images/logo4.png') }}" />
+          <img src="{{ url_for('static', filename='images/logo5.png') }}" />
+
+          <!-- Repeat for smooth animation -->
+
+          <img
+            src="{{ url_for('static', filename='images/vishal_photo_2.jpg') }}"
+          />
+          <img
+            src="{{ url_for('static', filename='images/IMG20251220150858.jpg') }}"
+          />
+          <img src="{{ url_for('static', filename='images/logo3.png') }}" />
+          <img src="{{ url_for('static', filename='images/logo4.png') }}" />
+          <img src="{{ url_for('static', filename='images/logo5.png') }}" />
+        </div>
+      </div>
+    </section>
+
+    <!--About Section-->
+
+    <section class="about">
+      <div class="about-image">
+        <img src="../static/images/about.jpg" alt="Children Education" />
+      </div>
+
+      <div class="about-content">
+        <h2>About Bright Future Foundation</h2>
+
+        <p>
+          Bright Future Foundation is a personal NGO dedicated to providing free
+          education for street children. We believe every child deserves the
+          opportunity to learn, grow, and build a successful future.
+        </p>
+
+        <p>
+          We organize free classes, distribute books, provide school supplies,
+          and help children enroll in schools.
+        </p>
+
+        <a href="/about-details" class="about-btn"> Read More </a>
+      </div>
+    </section>
+
+    <!--  Our Mission -->
+
+    <section class="mission">
+      <h2>Our Mission</h2>
+
+      <div class="mission-container">
+        <div class="card">
+          <div class="icon">📚</div>
+
+          <h3>Free Education</h3>
+
+          <p>
+            We provide free education to street children so they can build a
+            better future.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🎒</div>
+
+          <h3>School Supplies</h3>
+
+          <p>We distribute books, notebooks, bags, uniforms and stationery.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🍎</div>
+
+          <h3>Nutrition</h3>
+
+          <p>Healthy meals help children stay active and focus on learning.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🩺</div>
+
+          <h3>Health & Hygiene</h3>
+
+          <p>
+            We promote clean habits and basic health awareness for every child.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="programs" id="programs">
+      <h2>Our Programs</h2>
+
+      <div class="program-container">
+        <div class="program-card">
+          <img src="../static/images/childrenStudy.jpg" />
+
+          <h3>Free Education</h3>
+
+          <p>Free education for children living on streets.</p>
+        </div>
+
+        <div class="program-card">
+          <img src="../static/images/childrenClassroom.jpg" />
+
+          <h3>School Admission</h3>
+
+          <p>Helping children join nearby schools.</p>
+        </div>
+
+        <div class="program-card">
+          <img src="../static/images/bookDistribution.jpg" />
+
+          <h3>Book Distribution</h3>
+
+          <p>Providing books and study materials.</p>
+        </div>
+
+        <div class="program-card">
+          <img src="../static/images/eveningClasses.jpg" />
+
+          <h3>Evening Classes</h3>
+
+          <p>Evening study support for working children.</p>
+        </div>
+
+        <div class="program-card">
+          <img src="../static/images/scholarshipSupport.jpg" />
+
+          <h3>Scholarship Support</h3>
+
+          <p>Financial help for talented students.</p>
+        </div>
+
+        <div class="program-card">
+          <img src="../static/images/careerGuidline.jpg" />
+
+          <h3>Career Guidance</h3>
+
+          <p>Helping students choose a better future.</p>
+        </div>
+      </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

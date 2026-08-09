@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Add Partner</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <style>
+      .partner-form-container {
+        width: 500px;
+        margin: 60px auto;
+        padding: 35px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .partner-form-container h1 {
+        text-align: center;
+        color: #1769c2;
+        margin-bottom: 30px;
+      }
+
+      .partner-form-container label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .partner-form-container input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+      }
+
+      .partner-form-container button {
+        width: 100%;
+        padding: 13px;
+        border: none;
+        border-radius: 8px;
+        background: #1769c2;
+        color: white;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .partner-form-container button:hover {
+        background: #0d4f99;
+      }
+
+      .back-btn {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #1769c2;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="partner-form-container">
+      <h1>Add Partner & Supporter</h1>
+
+      <form method="POST" enctype="multipart/form-data">
+        <label>Partner / Supporter Name</label>
+
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter partner name"
+          required
+        />
+
+        <label>Partner Logo / Image</label>
+
+        <input type="file" name="image" accept="image/" required />
+
+        <button type="submit">Add Partner</button>
+      </form>
+
+      <a href="/partner/manage" class="back-btn"> ← Back to Manage Partners </a>
+    </div>
+  </body>
+</html>

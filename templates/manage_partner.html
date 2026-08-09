@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Manage Partners</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <style>
+      body {
+        background: #f5f7fa;
+      }
+
+      .partner-container {
+        width: 92%;
+        margin: 50px auto;
+      }
+
+      .partner-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .partner-header h1 {
+        color: #1769c2;
+      }
+
+      .add-btn {
+        background: #1769c2;
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+        border-radius: 8px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background: #1769c2;
+        color: white;
+      }
+
+      .partner-img {
+        width: 100px;
+        height: 70px;
+        object-fit: contain;
+      }
+
+      .edit-btn {
+        background: #198754;
+        color: white;
+        padding: 8px 14px;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .delete-btn {
+        background: #dc3545;
+        color: white;
+        padding: 8px 14px;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="partner-container">
+      <div class="partner-header">
+        <h1>Manage Partners & Supporters</h1>
+
+        <a href="/partner/add" class="add-btn"> + Add Partner </a>
+      </div>
+
+      <table>
+        <tr>
+          <th>ID</th>
+
+          <th>Name</th>
+
+          <th>Image</th>
+
+          <th>Action</th>
+        </tr>
+
+        {% for partner in partners %}
+
+        <tr>
+          <td>{{ partner[0] }}</td>
+
+          <td>{{ partner[1] }}</td>
+
+          <td>
+            <img
+              src="{{ url_for(
+                        'static',
+                        filename='images/' + partner[2]
+                    ) }}"
+              class="partner-img"
+            />
+          </td>
+
+          <td>
+            <a href="/partner/edit/{{ partner[0] }}" class="edit-btn"> Edit </a>
+
+            <a
+              href="/partner/delete/{{ partner[0] }}"
+              class="delete-btn"
+              onclick="return confirm('Delete this partner?');"
+            >
+              Delete
+            </a>
+          </td>
+        </tr>
+
+        {% else %}
+
+        <tr>
+          <td colspan="4">No partners added yet.</td>
+        </tr>
+
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>

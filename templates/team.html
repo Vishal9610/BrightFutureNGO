@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Our Team</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='css/style.css') }}"
+    />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+
+    <nav>
+      <div class="logo">NGO Management System</div>
+
+      <ul>
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/about">About</a></li>
+
+        <li><a href="/programs">Programs</a></li>
+
+        <li><a href="/gallery">Gallery</a></li>
+
+        <li><a href="/donate">Donate</a></li>
+
+        <li><a href="/contact">Contact</a></li>
+
+        <li><a href="/team">Our Team</a></li>
+      </ul>
+    </nav>
+
+    <h1 class="title">Meet Our Team</h1>
+
+    <div class="team-container">
+      {% for member in members %}
+
+      <div class="team-card">
+        <img src="{{ url_for('static', filename='images/' + member[3]) }}" />
+
+        <h2>{{ member[1] }}</h2>
+
+        <h4>{{ member[2] }}</h4>
+
+        <p>{{ member[4] }}</p>
+      </div>
+
+      {% endfor %}
+    </div>
+  </body>
+</html>

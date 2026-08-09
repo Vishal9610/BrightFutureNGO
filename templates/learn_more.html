@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Learn More - Bright Future Foundation</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+
+    <nav>
+      <h2>Bright Future Foundation</h2>
+
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/programs">Programs</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/donate">Donate</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero -->
+
+    <section class="learn-hero">
+      <div>
+        <h1>Give Every Child a Brighter Future</h1>
+
+        <p>
+          Education is not just about books and classrooms. It is about giving
+          children confidence, opportunities and the power to build a better
+          life.
+        </p>
+
+        <a href="/donate" class="learn-btn"> Support Our Mission </a>
+      </div>
+    </section>
+
+    <!-- Why Education -->
+
+    <section class="learn-section">
+      <h2>Why Education Matters</h2>
+
+      <p class="section-text">
+        Every child deserves the opportunity to learn, grow and dream. For
+        children living on the streets, access to education can change the
+        direction of their entire future.
+      </p>
+
+      <div class="learn-cards">
+        <div class="learn-card">
+          <div class="learn-icon">📚</div>
+
+          <h3>Better Education</h3>
+
+          <p>
+            We help children get access to basic education, books and learning
+            materials.
+          </p>
+        </div>
+
+        <div class="learn-card">
+          <div class="learn-icon">🎒</div>
+
+          <h3>Learning Support</h3>
+
+          <p>
+            School supplies and educational resources help children continue
+            their learning journey.
+          </p>
+        </div>
+
+        <div class="learn-card">
+          <div class="learn-icon">🌟</div>
+
+          <h3>New Opportunities</h3>
+
+          <p>
+            Education creates opportunities for children to build a safe and
+            independent future.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Impact -->
+
+    <section class="impact-section">
+      <div class="impact-content">
+        <h2>Our Impact</h2>
+
+        <p>
+          Bright Future Foundation works to bring education and hope to children
+          who need it most.
+        </p>
+
+        <p>
+          With the support of donors and well-wishers, we provide educational
+          resources and create learning opportunities for children from
+          disadvantaged backgrounds.
+        </p>
+
+        <div class="impact-points">
+          <div>
+            <strong>📖</strong>
+            <span>Free Learning Resources</span>
+          </div>
+
+          <div>
+            <strong>🎓</strong>
+            <span>Education Opportunities</span>
+          </div>
+
+          <div>
+            <strong>❤️</strong>
+            <span>Care & Support</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Goal -->
+
+    <section class="goal-section">
+      <h2>Our Goal</h2>
+
+      <p>
+        Our goal is simple — to make sure that no child is left behind because
+        of poverty or difficult circumstances.
+      </p>
+
+      <p>
+        Together, we can create a future where every child has the chance to
+        learn, dream and succeed.
+      </p>
+
+      <a href="/contact" class="contact-btn"> Join Us </a>
+    </section>
+
+    <!-- Our Partners & Supporters -->
+
+    <section class="partners">
+      <h2>Our Partners & Supporters</h2>
+
+      <p>
+        We are thankful to our partners and supporters who help us create a
+        brighter future for children.
+      </p>
+
+      <div class="partner-container">
+        {% for partner in partners %}
+
+        <div class="partner-card">
+          <img
+            src="{{ url_for('static', filename='images/' + partner[2]) }}"
+            alt="{{ partner[1] }}"
+          />
+
+          <h3>{{ partner[1] }}</h3>
+        </div>
+
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer>
+      <p>© 2026 Bright Future Foundation</p>
+    </footer>
+  </body>
+</html>

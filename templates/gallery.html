@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Gallery</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <div class="logo">NGO Management System</div>
+
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/programs">Programs</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/donate">Donate</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/team">Our Team</a></li>
+      </ul>
+    </nav>
+
+    <h1 class="gallery-title">Our Gallery</h1>
+
+    <div class="gallery-container">
+      {% for photo in photos %}
+
+      <div class="gallery-card">
+        <img
+          src="{{ url_for('static', filename='uploads/gallery/' + photo[2]) }}"
+          alt="{{ photo[1] }}"
+          onclick="openImage({{ loop.index0 }})"
+        />
+
+        <h3>{{ photo[1] }}</h3>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    <!-- Popup -->
+
+    <div id="imageModal" class="modal">
+      <span class="close" onclick="closeImage()">&times;</span>
+
+      <span class="prev" onclick="previousImage()">&#10094;</span>
+
+      <img id="popupImage" />
+
+      <span class="next" onclick="nextImage()">&#10095;</span>
+
+      <div id="caption"></div>
+
+      <div id="counter"></div>
+
+      <div class="zoom-controls">
+        <button type="button" onclick="zoomIn()">+</button>
+
+        <button type="button" onclick="zoomOut()">−</button>
+
+        <button type="button" onclick="resetZoom()">Reset</button>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  </body>
+</html>

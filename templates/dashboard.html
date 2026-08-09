@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../static/css/admin.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Bright Future</h2>
+      <a href="/dashboard">🏠 Dashboard</a>
+      <a href="/gallery">🖼 Gallery</a>
+      <a href="/gallery/upload">📤 Manage Gallery</a>
+      <a href="/messages">📞 View Messages</a>
+      
+        <a href="/manage-news"> 📰 Manage News </a>
+      </li>
+      <li><a href="/manage-team">Manage Team</a></li>
+      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+      <li>
+        <a href="/partner/manage"> 🤝 Partners </a>
+      </li>
+      <a href="/logout">🚪 Logout</a>
+    </div>
+    <div class="main">
+      <h1>Dashboard</h1>
+      <p>Welcome Admin</p>
+
+      <hr />
+      <div class="card">
+        <a href="/gallery"
+          ><h3>{{ gallery_count }}</h3>
+          Total Gallery Images</a
+        >
+      </div>
+      <br />
+      <div class="card">
+        <a href="/messages"
+          ><h3>{{ message_count }}</h3>
+          Total Contact Messages</a
+        >
+      </div>
+      <br />
+
+      <div class="cards">
+        <div class="card">
+          <a href="/gallery/upload"
+            ><h2>Gallery</h2>
+            Manage gallery images.</a
+          >
+        </div>
+        <div class="card">
+          <a href="/manage-donation"
+            ><h2>Donate</h2>
+            Manage donation details.</a
+          >
+        </div>
+        <div class="card">
+          <a href="/messages"
+            ><h2>Contact</h2>
+            View contact messages.</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

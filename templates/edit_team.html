@@ -1,0 +1,28 @@
+<h2>Edit Team Member</h2>
+
+<form method="POST" enctype="multipart/form-data">
+  <input type="text" name="name" value="{{ member[1] }}" />
+
+  <br /><br />
+
+  <input type="text" name="designation" value="{{ member[2] }}" />
+
+  <br /><br />
+
+  <textarea name="description">{{ member[4] }}</textarea>
+
+  <br /><br />
+
+  <img
+    src="{{ url_for('static',filename='images/' + member[3]) }}"
+    width="120"
+  />
+
+  <br /><br />
+
+  <input type="file" name="image" />
+
+  <br /><br />
+
+  <button>Update</button>
+</form>

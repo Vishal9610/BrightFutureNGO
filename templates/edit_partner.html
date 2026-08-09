@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Edit Partner</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <style>
+      .edit-container {
+        width: 500px;
+        margin: 60px auto;
+        padding: 35px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .edit-container h1 {
+        text-align: center;
+        color: #1769c2;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 20px;
+        margin-bottom: 8px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+
+      .current-img {
+        width: 180px;
+        height: 120px;
+        object-fit: contain;
+        display: block;
+        margin: 15px auto;
+      }
+
+      button {
+        width: 100%;
+        padding: 13px;
+        margin-top: 25px;
+        background: #1769c2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .back {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #1769c2;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="edit-container">
+      <h1>Edit Partner</h1>
+
+      <form method="POST" enctype="multipart/form-data">
+        <label>Partner Name</label>
+
+        <input type="text" name="name" value="{{ partner[1] }}" required />
+
+        <label>Current Image</label>
+
+        <img
+          src="{{ url_for(
+                'static',
+                filename='images/' + partner[2]
+            ) }}"
+          class="current-img"
+        />
+
+        <label>New Image</label>
+
+        <input type="file" name="image" accept="image/*" />
+
+        <button type="submit">Update Partner</button>
+      </form>
+
+      <a href="/partner/manage" class="back"> ← Back to Manage Partners </a>
+    </div>
+  </body>
+</html>

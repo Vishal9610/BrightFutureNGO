@@ -1,0 +1,123 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+}
+
+/* Sidebar */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#1565C0;
+    padding-top:20px;
+}
+
+.sidebar h2{
+    color:white;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:15px 25px;
+    font-size:18px;
+}
+
+.sidebar a:hover{
+    background:#0D47A1;
+}
+
+/* Main Content */
+
+.main{
+    margin-left:250px;
+    padding:30px;
+}
+
+.main h1{
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+.main p{
+    color:#555;
+    margin-bottom:20px;
+}
+
+hr{
+    margin-bottom:30px;
+}
+
+/* Statistics */
+
+.stats{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+}
+
+.stat-box{
+    width:300px;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.stat-box h2{
+    margin-bottom:15px;
+}
+
+.stat-box h1{
+    color:#1565C0;
+}
+
+/* Cards */
+
+.cards{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:300px;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.card h2{
+    margin-bottom:10px;
+}
+
+.card p{
+    margin-bottom:20px;
+}
+
+.card a{
+    display:inline-block;
+    text-decoration:none;
+    background:#1565C0;
+    color:white;
+    padding:10px 20px;
+    border-radius:5px;
+}
+
+.card a:hover{
+    background:#0D47A1;
+}

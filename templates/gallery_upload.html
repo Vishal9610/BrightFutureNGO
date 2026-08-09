@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Upload Gallery Image</title>
+        <link rel="stylesheet" href="../static/css/admin.css" />
+  </head>
+
+  <body>
+    <div class="sidebar">
+      <h2>Bright Future</h2>
+      <a href="/dashboard">🏠 Dashboard</a>
+      <a href="/gallery">🖼 Gallery</a>
+      <a href="/gallery/upload">📤 Manage Gallery</a>
+      <a href="/messages">View Messages</a>
+      <a href="/messages">📞 Contact</a>
+      <li>
+        <a href="/manage-news"> 📰 Manage News </a>
+      </li>
+      <li><a href="/manage-team">Manage Team</a></li>
+      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+      <a href="/logout">🚪 Logout</a>
+    </div>
+
+    <div class="main">
+      <h1>Dashboard</h1>
+      <p>Welcome Admin</p>
+
+      <hr />
+    <h2>Upload New Image</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      <label>Image Title</label>
+
+      <br /><br />
+
+      <input type="text" name="title" required />
+
+      <br /><br />
+
+      <label>Select Image</label>
+
+      <br /><br />
+
+      <input type="file" name="image" required />
+
+      <br /><br />
+
+      <button type="submit">Upload Image</button>
+    </form>
+
+    <br />
+
+    <a href="/gallery/manage"> Manage Gallery </a>
+  </body>
+</html>

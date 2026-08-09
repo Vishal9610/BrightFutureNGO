@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Donate</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="logo">NGO Management System</div>
+
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/programs">Programs</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/donate">Donate</a></li>
+        <li><a href="/contact">Contact</a></li>
+
+        <li><a href="/team">Our Team</a></li>
+      </ul>
+    </nav>
+
+    <!-- Donate Section -->
+
+    <section class="donate">
+      <h1>Support Our Mission</h1>
+
+      <p>
+        Every donation helps us provide education, books, school bags and a
+        brighter future for street children.
+      </p>
+
+      <div class="donate-box">
+        <div class="left">
+          <img
+            src="{{ url_for('static', filename='images/' + donation[6]) }}"
+            width="250"
+          />
+        </div>
+
+        <div class="right">
+          <h2>Donation Details</h2>
+
+          <p><b>UPI ID:</b> {{ donation[1] }}</p>
+
+          <p><b>Account Name:</b>{{ donation[2] }}</p>
+
+          <p><b>Bank:</b> {{ donation[3] }}</p>
+
+          <p><b>Account No:</b>{{ donation[4] }}</p>
+
+          <p><b>IFSC:</b>{{ donation[5] }}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+
+    <footer>
+      <p>© 2026 Bright Future Foundation</p>
+    </footer>
+  </body>
+</html>

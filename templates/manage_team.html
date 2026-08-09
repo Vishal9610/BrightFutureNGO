@@ -1,0 +1,81 @@
+<h2>Manage Team</h2>
+
+<form method="POST" enctype="multipart/form-data">
+  Name
+
+  <br />
+
+  <input type="text" name="name" required />
+
+  <br /><br />
+
+  Designation
+
+  <br />
+
+  <input type="text" name="designation" required />
+
+  <br /><br />
+
+  Description
+
+  <br />
+
+  <textarea name="description"></textarea>
+
+  <br /><br />
+
+  Photo
+
+  <br />
+
+  <input type="file" name="image" />
+
+  <br /><br />
+
+  <button>Add Member</button>
+</form>
+
+<hr />
+
+<table border="1" cellpadding="10">
+  <tr>
+    <th>Photo</th>
+
+    <th>Name</th>
+
+    <th>Designation</th>
+
+    <th>Action</th>
+  </tr>
+
+  {% for member in members %}
+
+  <tr>
+    <td>
+      <img
+        src="{{ url_for('static',filename='images/' + member[3]) }}"
+        width="80"
+      />
+    </td>
+
+    <td>{{ member[1] }}</td>
+
+    <td>{{ member[2] }}</td>
+
+    <td>
+      <a href="/edit-team/{{ member[0] }}">Edit</a>
+
+      |
+
+      <a
+        href="/delete-team/{{ member[0] }}"
+        onclick="return confirm('Delete Member?');"
+      >
+        Delete
+      </a>
+    </td>
+  </tr>
+
+  {% endfor %}
+</table>
