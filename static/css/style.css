@@ -120,6 +120,9 @@ nav ul li a:hover {
     font-size: 18px;
     font-weight: bold;
 }
+.btn0{
+    background-color: cyan;
+}
 
 .btn1 {
     background: #1565C0;
@@ -543,7 +546,7 @@ nav ul li a:hover {
 
 .impact {
     padding: 70px 10%;
-    background: #83a1bd;
+    background: rgb(53 201 175);
     text-align: center;
 }
 
@@ -597,7 +600,7 @@ nav ul li a:hover {
 .testimonials {
     padding: 80px 10%;
     text-align: center;
-    background: #b9c9c8;
+    background: rgb(71 109 192 / 59%);
 }
 
 .testimonials h2 {
@@ -649,7 +652,7 @@ nav ul li a:hover {
 
 .events {
     padding: 80px 10%;
-    background: #a4c4e4;
+    background: #1781c257;
     text-align: center;
 }
 
@@ -1782,6 +1785,7 @@ nav ul li a:hover {
         margin-right: 5px;
         margin-bottom: 10px;
         font-size: 15px;
+        background-color: #e68900;
     }
 
     .about-btn {
