@@ -1,55 +1,78 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>Upload Gallery Image</title>
-        <link rel="stylesheet" href="../static/css/admin.css" />
+    <meta charset="UTF-8" />
+
+    <title>Upload Gallery</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/admin.css') }}"
+    />
   </head>
 
   <body>
     <div class="sidebar">
       <h2>Bright Future</h2>
+
       <a href="/dashboard">🏠 Dashboard</a>
+
       <a href="/gallery">🖼 Gallery</a>
+
       <a href="/gallery/upload">📤 Manage Gallery</a>
-      <a href="/messages">View Messages</a>
-      <a href="/messages">📞 Contact</a>
-      <li>
-        <a href="/manage-news"> 📰 Manage News </a>
-      </li>
-      <li><a href="/manage-team">Manage Team</a></li>
-      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+
+      <a href="/messages">📞 View Messages</a>
+
+      <a href="/manage-news">📰 Manage News</a>
+
+      <a href="/manage-team">💡 Manage Team</a>
+
+      <a href="/manage-donation">❤️ Manage Donation</a>
+
+      <a href="/partner/manage">🤝 Partners</a>
+
       <a href="/logout">🚪 Logout</a>
     </div>
 
     <div class="main">
-      <h1>Dashboard</h1>
-      <p>Welcome Admin</p>
+      <h1>Manage Gallery</h1>
 
       <hr />
-    <h2>Upload New Image</h2>
 
-    <form method="POST" enctype="multipart/form-data">
-      <label>Image Title</label>
+      <h2>Upload New Gallery</h2>
 
-      <br /><br />
+      <form
+        action="{{ url_for('gallery.gallery_upload') }}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <label> Gallery Title </label>
 
-      <input type="text" name="title" required />
+        <br />
 
-      <br /><br />
+        <input
+          type="text"
+          name="title"
+          placeholder="Example: School Bag Distribution"
+          required
+        />
 
-      <label>Select Image</label>
+        <br /><br />
 
-      <br /><br />
+        <label> Select Multiple Photos </label>
 
-      <input type="file" name="image" required />
+        <br />
 
-      <br /><br />
+        <input type="file" name="images" multiple accept="image/*" required />
 
-      <button type="submit">Upload Image</button>
-    </form>
+        <br /><br />
 
-    <br />
+        <button type="submit">Upload Photos</button>
+      </form>
 
-    <a href="/gallery/manage"> Manage Gallery </a>
+      <br />
+
+      <a href="{{ url_for('gallery.gallery_manage') }}"> Manage Gallery </a>
+    </div>
   </body>
 </html>

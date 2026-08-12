@@ -1,6 +1,6 @@
-/* =========================
+/*   
    IMPACT COUNTERS
-========================= */
+   */
 
 const counters = document.querySelectorAll(".counter");
 
@@ -32,9 +32,9 @@ counters.forEach((counter) => {
 });
 
 
-/* =========================
+/*  
    TESTIMONIAL SLIDER
-========================= */
+    */
 
 let slides = document.querySelectorAll(".slide");
 let index = 0;
@@ -67,9 +67,9 @@ if (slides.length > 0) {
 }
 
 
-/* =========================
+/*   
    FAQ ACCORDION
-========================= */
+   */
 
 const questions = document.querySelectorAll(".faq-question");
 
@@ -101,9 +101,9 @@ questions.forEach((question) => {
 });
 
 
-/* =========================
+/*   
    GALLERY IMAGE POPUP
-========================= */
+   */
 
 let images = [];
 let currentIndex = 0;
@@ -220,9 +220,9 @@ function previousImage() {
 }
 
 
-/* =========================
+/*   
    IMAGE ZOOM
-========================= */
+   */
 
 function zoomIn() {
 
@@ -274,9 +274,9 @@ function resetZoom() {
 }
 
 
-/* =========================
+/*   
    KEYBOARD CONTROLS
-========================= */
+   */
 
 document.addEventListener("keydown", function (e) {
 
@@ -301,9 +301,9 @@ document.addEventListener("keydown", function (e) {
 });
 
 
-/* =========================
+/*   
    CLOSE MODAL ON BACKGROUND
-========================= */
+   */
 
 const modal = document.getElementById("imageModal");
 
@@ -317,4 +317,47 @@ if (modal) {
 
     });
 
+}
+
+function trackClick(pageName, elementName) {
+
+    fetch("/analytics/click", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            page_name: pageName,
+            element_name: elementName
+        })
+    });
+
+}
+
+function trackClick(pageName, elementName) {
+
+    fetch("/analytics/click", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            page_name: pageName,
+            element_name: elementName
+        })
+    });
+
+}
+
+function trackClick(pageName, elementName) {
+    fetch("/analytics/click", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            page_name: pageName,
+            element_name: elementName
+        })
+    });
 }

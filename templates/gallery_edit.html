@@ -1,6 +1,8 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+
     <title>Edit Gallery</title>
   </head>
 
@@ -8,7 +10,7 @@
     <h2>Edit Gallery Image</h2>
 
     <form method="POST" enctype="multipart/form-data">
-      <label>Title</label>
+      <label> Gallery Title </label>
 
       <br /><br />
 
@@ -16,22 +18,25 @@
 
       <br /><br />
 
-      <label>Current Image</label>
+      <label> Current Image </label>
 
       <br /><br />
 
       <img
-        src="{{ url_for('static', filename='uploads/gallery/' + photo[2]) }}"
-        width="200"
+        src="{{ url_for(
+            'static',
+            filename='uploads/gallery/' + photo[2]
+        ) }}"
+        width="250"
       />
 
       <br /><br />
 
-      <label>New Image (Optional)</label>
+      <label> New Image (Optional) </label>
 
       <br /><br />
 
-      <input type="file" name="image" />
+      <input type="file" name="image" accept="image/*" />
 
       <br /><br />
 
@@ -40,6 +45,6 @@
 
     <br />
 
-    <a href="/gallery/manage"> Back to Gallery </a>
+    <a href="{{ url_for('gallery.gallery_manage') }}"> Back to Gallery </a>
   </body>
 </html>

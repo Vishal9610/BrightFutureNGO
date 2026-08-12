@@ -1,15 +1,15 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
+
     <title>Manage Gallery</title>
   </head>
 
   <body>
     <h1>Manage Gallery</h1>
 
-    <br />
-
-    <a href="/gallery/upload"> Upload New Image </a>
+    <a href="{{ url_for('gallery.gallery_upload') }}"> Upload New Gallery </a>
 
     <br /><br />
 
@@ -31,7 +31,10 @@
 
         <td>
           <img
-            src="{{ url_for('static', filename='uploads/gallery/' + photo[2]) }}"
+            src="{{ url_for(
+                    'static',
+                    filename='uploads/gallery/' + photo[2]
+                ) }}"
             width="120"
           />
         </td>
@@ -39,12 +42,22 @@
         <td>{{ photo[1] }}</td>
 
         <td>
-          <a href="/gallery/edit/{{ photo[0] }}"> Edit </a>
+          <a
+            href="{{ url_for(
+                'gallery.gallery_edit',
+                id=photo[0]
+            ) }}"
+          >
+            Edit
+          </a>
 
           |
 
           <a
-            href="/gallery/delete/{{ photo[0] }}"
+            href="{{ url_for(
+                    'gallery.gallery_delete',
+                    id=photo[0]
+                ) }}"
             onclick="
               return confirm('Are you sure you want to delete this image?');
             "

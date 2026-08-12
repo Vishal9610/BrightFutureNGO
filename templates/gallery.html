@@ -1,71 +1,192 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>Gallery</title>
+    <meta charset="UTF-8" />
 
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Gallery | Bright Future Foundation</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f6f8f7;
+      }
+
+      .gallery-page {
+        width: 92%;
+        max-width: 1250px;
+        margin: 50px auto;
+      }
+
+      /* HEADER */
+
+      .gallery-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .gallery-header h1 {
+        font-size: 42px;
+        margin-bottom: 10px;
+        color: #174a2e;
+      }
+
+      .gallery-header p {
+        font-size: 17px;
+        color: #666;
+      }
+
+      /* GROUP */
+
+      .gallery-section {
+        margin-bottom: 65px;
+      }
+
+      /* TITLE */
+
+      .gallery-heading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .gallery-heading h2 {
+        margin: 0;
+        font-size: 28px;
+        color: #174a2e;
+        text-transform: capitalize;
+      }
+
+      .gallery-heading span {
+        width: 45px;
+        height: 3px;
+        background: #f4a261;
+        border-radius: 10px;
+      }
+
+      /* GRID */
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      /* CARD */
+
+      .gallery-card {
+        background: white;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+        transition: 0.3s ease;
+      }
+
+      .gallery-card:hover {
+        transform: translateY(-6px);
+      }
+
+      .gallery-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        display: block;
+        transition: 0.4s ease;
+      }
+
+      .gallery-card:hover img {
+        transform: scale(1.05);
+      }
+
+      /* TABLET */
+
+      @media (max-width: 900px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* MOBILE */
+
+      @media (max-width: 600px) {
+        .gallery-page {
+          width: 94%;
+          margin: 30px auto;
+        }
+
+        .gallery-header h1 {
+          font-size: 32px;
+        }
+
+        .gallery-heading h2 {
+          font-size: 22px;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-card img {
+          height: 240px;
+        }
+      }
+    </style>
   </head>
 
   <body>
-    <nav>
-      <div class="logo">NGO Management System</div>
+    <div class="gallery-page">
+      <!-- MAIN HEADER -->
 
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/programs">Programs</a></li>
-        <li><a href="/gallery">Gallery</a></li>
-        <li><a href="/donate">Donate</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/team">Our Team</a></li>
-      </ul>
-    </nav>
+      <div class="gallery-header">
+        <h1>Our Gallery</h1>
 
-    <h1 class="gallery-title">Our Gallery</h1>
-
-    <div class="gallery-container">
-      {% for photo in photos %}
-
-      <div class="gallery-card">
-        <img
-          src="{{ url_for('static', filename='uploads/gallery/' + photo[2]) }}"
-          alt="{{ photo[1] }}"
-          onclick="openImage({{ loop.index0 }})"
-        />
-
-        <h3>{{ photo[1] }}</h3>
+        <p>Moments from our work with the community</p>
       </div>
+
+      <!-- GROUPED GALLERY -->
+
+      {% for title, photos in gallery_groups.items() %}
+
+      <section class="gallery-section">
+        <!-- TITLE ONLY ONCE -->
+
+        <div class="gallery-heading">
+          <span></span>
+
+          <h2>{{ title }}</h2>
+
+          <span></span>
+        </div>
+
+        <!-- PHOTOS -->
+
+        <div class="gallery-grid">
+          {% for photo in photos %}
+
+          <div class="gallery-card">
+            <img
+              src="{{ url_for(
+                        'static',
+                        filename='uploads/gallery/' + photo['image']
+                    ) }}"
+              alt="{{ title }}"
+              loading="lazy"
+            />
+          </div>
+
+          {% endfor %}
+        </div>
+      </section>
 
       {% endfor %}
     </div>
-
-    <!-- Popup -->
-
-    <div id="imageModal" class="modal">
-      <span class="close" onclick="closeImage()">&times;</span>
-
-      <span class="prev" onclick="previousImage()">&#10094;</span>
-
-      <img id="popupImage" />
-
-      <span class="next" onclick="nextImage()">&#10095;</span>
-
-      <div id="caption"></div>
-
-      <div id="counter"></div>
-
-      <div class="zoom-controls">
-        <button type="button" onclick="zoomIn()">+</button>
-
-        <button type="button" onclick="zoomOut()">−</button>
-
-        <button type="button" onclick="resetZoom()">Reset</button>
-      </div>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
 </html>

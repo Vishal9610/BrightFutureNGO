@@ -1,134 +1,273 @@
-from flask import Blueprint
-from flask import render_template
-from flask import request
-from flask import redirect
-
-from config import mysql
-
+from flask import Blueprint, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
-
+from config import mysql
+from routes.analytics import record_view
 import os
 
-gallery_bp = Blueprint("gallery",__name__)
+gallery_bp = Blueprint("gallery", __name__)
 
-@gallery_bp.route("/gallery/upload",methods=["GET","POST"])
+UPLOAD_FOLDER = "static/uploads/gallery"
+
+
+# =====================================================
+# PUBLIC GALLERY
+# =====================================================
+
+@gallery_bp.route("/gallery")
+def gallery():
+
+    record_view("Gallery")
+
+    cur = mysql.connection.cursor()
+
+    cur.execute("""
+        SELECT id, title, image
+        FROM gallery
+        ORDER BY id DESC
+    """)
+
+    photos = cur.fetchall()
+
+    cur.close()
+
+    # -----------------------------------------
+    # Group photos according to title
+    # -----------------------------------------
+
+    gallery_groups = {}
+
+    for photo in photos:
+
+        photo_id = photo[0]
+        title = photo[1]
+        image = photo[2]
+
+        if title not in gallery_groups:
+            gallery_groups[title] = []
+
+        gallery_groups[title].append({
+            "id": photo_id,
+            "image": image
+        })
+
+    return render_template(
+        "gallery.html",
+        gallery_groups=gallery_groups
+    )
+
+
+# =====================================================
+# UPLOAD MULTIPLE PHOTOS
+# =====================================================
+
+@gallery_bp.route("/gallery/upload", methods=["GET", "POST"])
 def gallery_upload():
 
-    if request.method=="POST":
+    if request.method == "POST":
 
-        title=request.form["title"]
+        title = request.form.get("title", "").strip()
 
-        image=request.files["image"]
+        images = request.files.getlist("images")
 
-        filename=secure_filename(image.filename)
+        if not title:
+            flash("Please enter gallery title.")
+            return redirect("/gallery/upload")
 
-        image.save(
+        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-            os.path.join(
-                "static/uploads/gallery",
-                filename
-            )
+        cur = mysql.connection.cursor()
 
-        )
+        uploaded = 0
 
-        cur=mysql.connection.cursor()
+        for image in images:
 
-        cur.execute(
+            if image and image.filename:
 
-            "INSERT INTO gallery(title,image) VALUES(%s,%s)",
+                filename = secure_filename(image.filename)
 
-            (title,filename)
+                image_path = os.path.join(
+                    UPLOAD_FOLDER,
+                    filename
+                )
 
-        )
+                image.save(image_path)
+
+                cur.execute("""
+                    INSERT INTO gallery
+                    (title, image)
+                    VALUES (%s, %s)
+                """, (title, filename))
+
+                uploaded += 1
 
         mysql.connection.commit()
 
         cur.close()
 
-        return redirect("/gallery/manage")
+        flash(
+            f"{uploaded} photos uploaded successfully!"
+        )
 
-    return render_template("gallery_upload.html")
+        return redirect("/gallery")
 
+    return render_template(
+        "gallery_upload.html"
+    )
+
+
+# =====================================================
+# MANAGE GALLERY
+# =====================================================
 
 @gallery_bp.route("/gallery/manage")
-def manage_gallery():
+def gallery_manage():
 
     cur = mysql.connection.cursor()
 
-    cur.execute("SELECT * FROM gallery ORDER BY id DESC")
+    cur.execute("""
+        SELECT id, title, image
+        FROM gallery
+        ORDER BY id DESC
+    """)
 
     photos = cur.fetchall()
 
     cur.close()
 
     return render_template(
-        "manage_gallery.html",
+        "gallery_manage.html",
         photos=photos
     )
 
-@gallery_bp.route("/gallery/edit/<int:id>", methods=["GET", "POST"])
-def edit_gallery(id):
+
+# =====================================================
+# EDIT GALLERY IMAGE
+# =====================================================
+
+@gallery_bp.route(
+    "/gallery/edit/<int:id>",
+    methods=["GET", "POST"]
+)
+def gallery_edit(id):
 
     cur = mysql.connection.cursor()
 
     if request.method == "POST":
 
-        title = request.form["title"]
+        title = request.form.get("title", "").strip()
 
-        image = request.files["image"]
+        image = request.files.get("image")
 
-        if image.filename != "":
+        # -----------------------------------------
+        # If new image selected
+        # -----------------------------------------
 
-            filename = secure_filename(image.filename)
+        if image and image.filename:
+
+            filename = secure_filename(
+                image.filename
+            )
+
+            os.makedirs(
+                UPLOAD_FOLDER,
+                exist_ok=True
+            )
 
             image.save(
                 os.path.join(
-                    "static/uploads/gallery",
+                    UPLOAD_FOLDER,
                     filename
                 )
             )
 
-            cur.execute(
-                "UPDATE gallery SET title=%s, image=%s WHERE id=%s",
-                (title, filename, id)
-            )
+            cur.execute("""
+                UPDATE gallery
+                SET title=%s, image=%s
+                WHERE id=%s
+            """, (title, filename, id))
+
+        # -----------------------------------------
+        # Only title changed
+        # -----------------------------------------
 
         else:
 
-            cur.execute(
-                "UPDATE gallery SET title=%s WHERE id=%s",
-                (title, id)
-            )
+            cur.execute("""
+                UPDATE gallery
+                SET title=%s
+                WHERE id=%s
+            """, (title, id))
 
         mysql.connection.commit()
 
         cur.close()
 
+        flash("Gallery updated successfully!")
+
         return redirect("/gallery/manage")
 
-    cur.execute("SELECT * FROM gallery WHERE id=%s", (id,))
+    # GET request
+
+    cur.execute("""
+        SELECT id, title, image
+        FROM gallery
+        WHERE id=%s
+    """, (id,))
 
     photo = cur.fetchone()
 
     cur.close()
 
     return render_template(
-        "edit_gallery.html",
+        "gallery_edit.html",
         photo=photo
     )
 
+
+# =====================================================
+# DELETE GALLERY IMAGE
+# =====================================================
+
 @gallery_bp.route("/gallery/delete/<int:id>")
-def delete_gallery(id):
+def gallery_delete(id):
 
     cur = mysql.connection.cursor()
 
-    cur.execute(
-        "DELETE FROM gallery WHERE id=%s",
-        (id,)
-    )
+    # First get image filename
 
-    mysql.connection.commit()
+    cur.execute("""
+        SELECT image
+        FROM gallery
+        WHERE id=%s
+    """, (id,))
+
+    result = cur.fetchone()
+
+    if result:
+
+        filename = result[0]
+
+        # Delete database record
+
+        cur.execute("""
+            DELETE FROM gallery
+            WHERE id=%s
+        """, (id,))
+
+        mysql.connection.commit()
+
+        # Delete physical image
+
+        image_path = os.path.join(
+            UPLOAD_FOLDER,
+            filename
+        )
+
+        if os.path.exists(image_path):
+            os.remove(image_path)
 
     cur.close()
+
+    flash("Gallery image deleted successfully!")
 
     return redirect("/gallery/manage")

@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <title>Bright Future Foundation</title>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <link rel="stylesheet" href="../static/css/style.css" />
   </head>
 
@@ -13,19 +16,20 @@
       <div class="logo">NGO Management System</div>
 
       <ul>
-        <li><a href="#home">Home</a></li>
-
-        <li><a href="/about">About</a></li>
+        <li><a href="/">Home</a></li>
 
         <li><a href="/programs">Programs</a></li>
-
+        <li><a href="/team">Our Team</a></li>
         <li><a href="/gallery">Gallery</a></li>
 
-        <li><a href="/donate">Donate</a></li>
+        <li>
+          <a id="donate" href="/donate" onclick="trackClick('Home', 'Donate')"
+            >Donate</a
+          >
+        </li>
+        <li><a href="/about">About</a></li>
 
         <li><a href="/contact">Contact</a></li>
-
-        <li><a href="/team">Our Team</a></li>
       </ul>
     </nav>
 
@@ -40,9 +44,21 @@
           supplies and learning opportunities for street children.
         </p>
 
-        <a href="/learn-more" class="btn">Learn More</a>
+        <a
+          href="/learn-more"
+          class="btn"
+          onclick="trackClick('Home', 'Learn More')"
+        >
+          Learn More
+        </a>
 
-        <a href="/donate" class="btn btn2">Donate Now</a>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLScsIslzh0CjYKVwNpUVOihJ8paBSLv6gLYGQwl5bc6sbyyI8A/viewform?usp=publish-editor"
+          class="btn btn2"
+          onclick="trackClick('Home', 'Join Us')"
+        >
+          Join Us
+        </a>
       </div>
     </section>
 
@@ -92,7 +108,7 @@
             education."
           </p>
 
-          <h3>Rahul Kumar</h3>
+          <h3>Vishal Kumar</h3>
         </div>
 
         <div class="slide">
@@ -156,7 +172,11 @@
               Celebration with children, cultural programs and free study kits.
             </p>
 
-            <a href="/contact" class="event-btn">Join Event</a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLScsIslzh0CjYKVwNpUVOihJ8paBSLv6gLYGQwl5bc6sbyyI8A/viewform?usp=publish-editor"
+              class="event-btn"
+              >Join Event</a
+            >
           </div>
         </div>
 
@@ -173,7 +193,11 @@
               Free books and notebooks will be distributed to needy children.
             </p>
 
-            <a href="/contact" class="event-btn">Register</a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLScsIslzh0CjYKVwNpUVOihJ8paBSLv6gLYGQwl5bc6sbyyI8A/viewform?usp=publish-editor"
+              class="event-btn"
+              >Register</a
+            >
           </div>
         </div>
 
@@ -190,7 +214,11 @@
               Free medical check-up and health awareness program for children.
             </p>
 
-            <a href="/contact" class="event-btn">Register</a>
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLScsIslzh0CjYKVwNpUVOihJ8paBSLv6gLYGQwl5bc6sbyyI8A/viewform?usp=publish-editor"
+              class="event-btn"
+              >Register</a
+            >
           </div>
         </div>
       </div>
@@ -313,7 +341,7 @@
       <h2>Our Mission</h2>
 
       <div class="mission-container">
-        <div class="card">
+        <div class="card" onclick="trackClick('Home', 'Free Education')">
           <div class="icon">📚</div>
 
           <h3>Free Education</h3>
@@ -324,7 +352,7 @@
           </p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="trackClick('Home', 'School Supplies')">
           <div class="icon">🎒</div>
 
           <h3>School Supplies</h3>
@@ -332,7 +360,7 @@
           <p>We distribute books, notebooks, bags, uniforms and stationery.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="trackClick('Home', 'Nutrition')">
           <div class="icon">🍎</div>
 
           <h3>Nutrition</h3>
@@ -340,7 +368,7 @@
           <p>Healthy meals help children stay active and focus on learning.</p>
         </div>
 
-        <div class="card">
+        <div class="card" onclick="trackClick('Home', 'Health & Hygiene')">
           <div class="icon">🩺</div>
 
           <h3>Health & Hygiene</h3>
@@ -356,7 +384,10 @@
       <h2>Our Programs</h2>
 
       <div class="program-container">
-        <div class="program-card">
+        <div
+          class="program-card"
+          onclick="trackClick('Home', 'Free Education Program')"
+        >
           <img src="../static/images/childrenStudy.jpg" />
 
           <h3>Free Education</h3>
@@ -364,7 +395,10 @@
           <p>Free education for children living on streets.</p>
         </div>
 
-        <div class="program-card">
+        <div
+          class="program-card"
+          onclick="trackClick('Home', 'School Admission')"
+        >
           <img src="../static/images/childrenClassroom.jpg" />
 
           <h3>School Admission</h3>
@@ -372,7 +406,10 @@
           <p>Helping children join nearby schools.</p>
         </div>
 
-        <div class="program-card">
+        <div
+          class="program-card"
+          onclick="trackClick('Home', 'Book Distribution')"
+        >
           <img src="../static/images/bookDistribution.jpg" />
 
           <h3>Book Distribution</h3>
@@ -380,7 +417,10 @@
           <p>Providing books and study materials.</p>
         </div>
 
-        <div class="program-card">
+        <div
+          class="program-card"
+          onclick="trackClick('Home', 'Evening Classes')"
+        >
           <img src="../static/images/eveningClasses.jpg" />
 
           <h3>Evening Classes</h3>
@@ -388,7 +428,10 @@
           <p>Evening study support for working children.</p>
         </div>
 
-        <div class="program-card">
+        <div
+          class="program-card"
+          onclick="trackClick('Home', 'Scholarship Support')"
+        >
           <img src="../static/images/scholarshipSupport.jpg" />
 
           <h3>Scholarship Support</h3>
@@ -396,7 +439,10 @@
           <p>Financial help for talented students.</p>
         </div>
 
-        <div class="program-card">
+        <div
+          class="program-card"
+          onclick="trackClick('Home', 'Career Guidline')"
+        >
           <img src="../static/images/careerGuidline.jpg" />
 
           <h3>Career Guidance</h3>
@@ -405,6 +451,106 @@
         </div>
       </div>
     </section>
+
+    <!--Footer-->
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <!-- NGO BRAND -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span>💙</span>
+            <h2>BrightFuture</h2>
+          </div>
+
+          <p>
+            BrightFuture NGO is working to provide education, support and better
+            opportunities to underprivileged children and communities.
+          </p>
+          <div class="footer-social">
+            <a
+              href="https://www.instagram.com/project.mehar?igsh=cmEwd3FzemRiaTI4"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- EXPLORE -->
+        <div class="footer-column">
+          <h3>Explore</h3>
+
+          <a href="/">Home</a>
+          <a href="/about">About Us</a>
+          <a href="/programs">Our Programs</a>
+          <a href="/gallery">Gallery</a>
+          <a href="/team">Our Team</a>
+          <a href="/contact">Contact Us</a>
+        </div>
+
+        <!-- OUR INITIATIVES -->
+        <div class="footer-column">
+          <h3>Our Initiatives</h3>
+
+          <a href="/programs">Children Education</a>
+          <a href="/programs">Book Distribution</a>
+          <a href="/programs">School Bag Support</a>
+          <a href="/programs">Scholarship Support</a>
+          <a href="/programs">Career Guidance</a>
+          <a href="/programs">Community Support</a>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="footer-column footer-contact">
+          <h3>Get In Touch</h3>
+
+          <p>📍 India</p>
+
+          <p>📧 project.mehar@gmail.com</p>
+
+          <p>📞 +91 XXXXX XXXXX</p>
+
+          <a href="/contact" class="footer-contact-btn"> Contact Us → </a>
+        </div>
+      </div>
+
+      <!-- DONATION CTA -->
+
+      <div class="footer-cta">
+        <div>
+          <h2>Help Us Build a Brighter Future</h2>
+
+          <p>
+            Your small contribution can help a child learn, grow and dream
+            bigger.
+          </p>
+        </div>
+
+        <a href="/donate" onclick="trackClick('Home', 'Donate')">
+          Donate Now
+        </a>
+      </div>
+
+      <!-- BOTTOM -->
+
+      <div class="footer-bottom">
+        <p>© 2026 <strong>BrightFuture NGO</strong>. All Rights Reserved.</p>
+
+        <div class="footer-policy">
+          <a href="#">Privacy Policy</a>
+
+          <span>|</span>
+
+          <a href="#">Terms & Conditions</a>
+
+          <span>|</span>
+
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   </body>
