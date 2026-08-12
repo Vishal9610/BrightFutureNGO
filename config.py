@@ -1,4 +1,9 @@
 import os
+from flask_mysqldb import MySQL
+
+
+mysql = MySQL()
+
 
 class Config:
 
