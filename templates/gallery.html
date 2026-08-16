@@ -1,167 +1,140 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <title>Gallery | Project Mehar Foundation</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
 
-    <title>Gallery | Bright Future Foundation</title>
+    <link rel="stylesheet" href="../static/css/style.css" />
 
     <style>
-      * {
+      /* =========================
+         GALLERY IMAGE CLICK
+      ========================= */
+
+      .gallery-card img {
+        cursor: pointer;
+      }
+
+      /* =========================
+         IMAGE MODAL
+      ========================= */
+
+      #imageModal {
+        display: none;
+        position: fixed;
+        z-index: 99999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 30px;
         box-sizing: border-box;
       }
 
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f6f8f7;
-      }
-
-      .gallery-page {
-        width: 92%;
-        max-width: 1250px;
-        margin: 50px auto;
-      }
-
-      /* HEADER */
-
-      .gallery-header {
-        text-align: center;
-        margin-bottom: 60px;
-      }
-
-      .gallery-header h1 {
-        font-size: 42px;
-        margin-bottom: 10px;
-        color: #174a2e;
-      }
-
-      .gallery-header p {
-        font-size: 17px;
-        color: #666;
-      }
-
-      /* GROUP */
-
-      .gallery-section {
-        margin-bottom: 65px;
-      }
-
-      /* TITLE */
-
-      .gallery-heading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 25px;
-      }
-
-      .gallery-heading h2 {
-        margin: 0;
-        font-size: 28px;
-        color: #174a2e;
-        text-transform: capitalize;
-      }
-
-      .gallery-heading span {
-        width: 45px;
-        height: 3px;
-        background: #f4a261;
-        border-radius: 10px;
-      }
-
-      /* GRID */
-
-      .gallery-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 22px;
-      }
-
-      /* CARD */
-
-      .gallery-card {
-        background: white;
-        border-radius: 14px;
-        overflow: hidden;
-        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
-        transition: 0.3s ease;
-      }
-
-      .gallery-card:hover {
-        transform: translateY(-6px);
-      }
-
-      .gallery-card img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
+      #modalImage {
         display: block;
-        transition: 0.4s ease;
+
+        max-width: 90%;
+        max-height: 85vh;
+
+        width: auto;
+        height: auto;
+
+        object-fit: contain;
+
+        border-radius: 8px;
+
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
       }
 
-      .gallery-card:hover img {
-        transform: scale(1.05);
+      /* CLOSE BUTTON */
+
+      .image-modal-close {
+        position: absolute;
+
+        top: 20px;
+        right: 30px;
+
+        color: white;
+
+        font-size: 42px;
+        font-weight: bold;
+
+        cursor: pointer;
+
+        z-index: 100000;
+
+        line-height: 1;
+
+        transition: 0.2s;
       }
 
-      /* TABLET */
-
-      @media (max-width: 900px) {
-        .gallery-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
+      .image-modal-close:hover {
+        transform: scale(1.15);
       }
 
       /* MOBILE */
 
       @media (max-width: 600px) {
-        .gallery-page {
-          width: 94%;
-          margin: 30px auto;
+        #imageModal {
+          padding: 15px;
         }
 
-        .gallery-header h1 {
-          font-size: 32px;
+        #modalImage {
+          max-width: 95%;
+          max-height: 80vh;
         }
 
-        .gallery-heading h2 {
-          font-size: 22px;
-        }
-
-        .gallery-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .gallery-card img {
-          height: 240px;
+        .image-modal-close {
+          top: 12px;
+          right: 18px;
+          font-size: 36px;
         }
       }
     </style>
   </head>
 
   <body>
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
     <nav>
-      <div class="logo">NGO Management System</div>
+      <div class="logo">Project Mehar</div>
 
       <ul>
         <li><a href="/">Home</a></li>
 
         <li><a href="/programs">Programs</a></li>
+
         <li><a href="/team">Our Team</a></li>
+
         <li><a href="/gallery">Gallery</a></li>
 
         <li><a href="/about">About</a></li>
 
         <li><a href="/contact">Contact</a></li>
       </ul>
+
       <li>
-        <a id="donate" href="/donate" onclick="trackClick('Home', 'Donate')"
-          >Donate</a
-        >
+        <a id="donate" href="/donate" onclick="trackClick('Home', 'Donate')">
+          Donate
+        </a>
       </li>
     </nav>
+
+    <!-- =========================
+         GALLERY PAGE
+    ========================= -->
 
     <div class="gallery-page">
       <!-- MAIN HEADER -->
@@ -172,12 +145,14 @@
         <p>Moments from our work with the community</p>
       </div>
 
-      <!-- GROUPED GALLERY -->
+      <!-- =========================
+           GROUPED GALLERY
+      ========================= -->
 
       {% for title, photos in gallery_groups.items() %}
 
       <section class="gallery-section">
-        <!-- TITLE ONLY ONCE -->
+        <!-- TITLE -->
 
         <div class="gallery-heading">
           <span></span>
@@ -194,12 +169,10 @@
 
           <div class="gallery-card">
             <img
-              src="{{ url_for(
-                        'static',
-                        filename='uploads/gallery/' + photo['image']
-                    ) }}"
+              src="{{ url_for('static', filename='uploads/gallery/' + photo['image']) }}"
               alt="{{ title }}"
               loading="lazy"
+              onclick="openImage(this.src)"
             />
           </div>
 
@@ -209,5 +182,193 @@
 
       {% endfor %}
     </div>
+
+    <!-- =========================
+         IMAGE MODAL
+    ========================= -->
+
+    <div id="imageModal" onclick="closeImage(event)">
+      <!-- CLOSE BUTTON -->
+
+      <span class="image-modal-close" onclick="closeImage()"> &times; </span>
+
+      <!-- LARGE IMAGE -->
+
+      <img
+        id="modalImage"
+        src=""
+        alt="Gallery Image"
+        onclick="event.stopPropagation()"
+      />
+    </div>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="site-footer">
+      <div class="footer-main">
+        <!-- NGO BRAND -->
+
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span>💙</span>
+
+            <h2>Project Mehar</h2>
+          </div>
+
+          <p>
+            Project Mehar is working to provide education, support and better
+            opportunities to underprivileged children and communities.
+          </p>
+
+          <div class="footer-social">
+            <a
+              href="https://www.instagram.com/project.mehar?igsh=cmEwd3FzemRiaTI4"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="#">
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a href="#">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+
+            <a href="#">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- EXPLORE -->
+
+        <div class="footer-column">
+          <h3>Explore</h3>
+
+          <a href="/">Home</a>
+
+          <a href="/about">About Us</a>
+
+          <a href="/programs">Our Programs</a>
+
+          <a href="/gallery">Gallery</a>
+
+          <a href="/team">Our Team</a>
+
+          <a href="/contact">Contact Us</a>
+        </div>
+
+        <!-- OUR INITIATIVES -->
+
+        <div class="footer-column">
+          <h3>Our Initiatives</h3>
+
+          <a href="/programs">Children Education</a>
+
+          <a href="/programs">Book Distribution</a>
+
+          <a href="/programs">Career Guidance</a>
+
+          <a href="/programs">Community Support</a>
+        </div>
+
+        <!-- CONTACT -->
+
+        <div class="footer-column footer-contact">
+          <h3>Get In Touch</h3>
+
+          <p>📍 India</p>
+
+          <p>📧 project.mehar@gmail.com</p>
+
+          <p>📞 +91 XXXXX XXXXX</p>
+
+          <a href="/contact" class="footer-contact-btn"> Contact Us → </a>
+        </div>
+      </div>
+
+      <!-- DONATION CTA -->
+
+      <div class="footer-cta">
+        <div>
+          <h2>Help Us Build a Brighter Future</h2>
+
+          <p>
+            Your small contribution can help a child learn, grow and dream
+            bigger.
+          </p>
+        </div>
+
+        <a href="/donate" onclick="trackClick('Home', 'Donate')">
+          Donate Now
+        </a>
+      </div>
+
+      <!-- BOTTOM -->
+
+      <div class="footer-bottom">
+        <p>© 2026 <strong>Project Mehar</strong>. All Rights Reserved.</p>
+
+        <div class="footer-policy">
+          <a href="#">Privacy Policy</a>
+
+          <span>|</span>
+
+          <a href="#">Terms & Conditions</a>
+
+          <span>|</span>
+
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =========================
+         IMAGE MODAL JAVASCRIPT
+    ========================= -->
+
+    <script>
+      function openImage(imageSrc) {
+        const modal = document.getElementById("imageModal");
+
+        const modalImage = document.getElementById("modalImage");
+
+        modalImage.src = imageSrc;
+
+        modal.style.display = "flex";
+
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeImage(event) {
+        /*
+          Agar user image par click kare,
+          modal close nahi hoga.
+        */
+
+        if (event && event.target && event.target.id === "modalImage") {
+          return;
+        }
+
+        const modal = document.getElementById("imageModal");
+
+        modal.style.display = "none";
+
+        document.getElementById("modalImage").src = "";
+
+        document.body.style.overflow = "";
+      }
+
+      /* ESC KEY */
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeImage();
+        }
+      });
+    </script>
   </body>
 </html>

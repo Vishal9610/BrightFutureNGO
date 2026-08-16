@@ -1,56 +1,36 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/css/admin.css" />
 
     <title>Analytics Dashboard</title>
 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-      }
-
-      body {
-        background: #f4f6f9;
-      }
-
-      .main {
-        margin-left: 250px;
-        padding: 30px;
-      }
-
-      h1 {
-        color: #1565c0;
-        margin-bottom: 10px;
-      }
-
       .subtitle {
         color: #666;
         margin-bottom: 30px;
       }
 
-      /* Statistics */
+      /* STATISTICS */
 
       .stats {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
         margin-bottom: 40px;
+        width: 70%;
       }
 
       .stat-box {
         background: white;
+        width: 225px;
         padding: 25px;
         border-radius: 12px;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.29);
       }
 
       .stat-box h3 {
-        color: #555;
+        color: #272020;
         margin-bottom: 15px;
       }
 
@@ -59,7 +39,7 @@
         font-size: 35px;
       }
 
-      /* Tables */
+      /* SECTION */
 
       .section {
         background: white;
@@ -67,12 +47,15 @@
         margin-bottom: 30px;
         border-radius: 12px;
         box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+        overflow-x: auto;
       }
 
       .section h2 {
         color: #1565c0;
         margin-bottom: 20px;
       }
+
+      /* TABLE */
 
       table {
         width: 100%;
@@ -100,29 +83,69 @@
         color: #1565c0;
       }
 
-      @media (max-width: 900px) {
-        .main {
-          margin-left: 0;
-        }
+      /* TABLET */
 
+      @media (max-width: 1000px) {
         .stats {
           grid-template-columns: repeat(2, 1fr);
         }
       }
 
-      @media (max-width: 600px) {
+      /* MOBILE */
+      body {
+        margin: 0%;
+        display: flex;
+      }
+
+      @media (max-width: 300px) {
         .stats {
           grid-template-columns: 1fr;
         }
 
-        .main {
+        .stat-box {
+          padding: 20px;
+        }
+
+        .section {
           padding: 15px;
+        }
+
+        table {
+          min-width: 500px;
         }
       }
     </style>
   </head>
 
   <body>
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+      <h2>Project Mehar</h2>
+
+      <a href="/dashboard"> 🏠 Dashboard </a>
+
+      <a href="/gallery"> 🖼 Gallery </a>
+
+      <a href="/gallery/upload"> 📤 Manage Gallery </a>
+
+      <a href="/messages"> 📞 View Messages </a>
+
+      <a href="/manage-news"> 📰 Manage News </a>
+
+      <a href="/manage-team"> 💡 Manage Team </a>
+
+      <a href="/manage-donation"> ❤️ Manage Donation </a>
+
+      <a href="/partner/manage"> 🤝 Partners </a>
+
+      <a href="/analytics-dashboard"> 📊 Website Analytics </a>
+
+      <a href="/logout"> 🚪 Logout </a>
+    </div>
+
+    <!-- MAIN CONTENT -->
+
     <div class="main">
       <h1>Website Analytics</h1>
 
@@ -130,35 +153,35 @@
         Track your NGO website visitors and element interactions.
       </p>
 
-      <!-- ========================= -->
-      <!-- VIEW STATISTICS -->
-      <!-- ========================= -->
+      <!-- STATISTICS -->
 
       <div class="stats">
         <div class="stat-box">
           <h3>Today Views</h3>
+
           <h2>{{ today }}</h2>
         </div>
 
         <div class="stat-box">
           <h3>This Week</h3>
+
           <h2>{{ week }}</h2>
         </div>
 
         <div class="stat-box">
           <h3>This Month</h3>
+
           <h2>{{ month }}</h2>
         </div>
 
         <div class="stat-box">
           <h3>This Year</h3>
+
           <h2>{{ year }}</h2>
         </div>
       </div>
 
-      <!-- ========================= -->
       <!-- PAGE VIEWS -->
-      <!-- ========================= -->
 
       <div class="section">
         <h2>📄 Page Views</h2>
@@ -167,6 +190,7 @@
           <thead>
             <tr>
               <th>Page</th>
+
               <th>Total Views</th>
             </tr>
           </thead>
@@ -191,9 +215,7 @@
         </table>
       </div>
 
-      <!-- ========================= -->
       <!-- ELEMENT CLICKS -->
-      <!-- ========================= -->
 
       <div class="section">
         <h2>🖱️ Element Clicks</h2>
@@ -202,7 +224,9 @@
           <thead>
             <tr>
               <th>Page</th>
+
               <th>Element</th>
+
               <th>Total Clicks</th>
             </tr>
           </thead>

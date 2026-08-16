@@ -1,14 +1,38 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
     <title>Edit Gallery</title>
   </head>
 
   <body>
-    <h2>Edit Gallery Image</h2>
 
+    <div class="sidebar">
+      <h2> Project Mehar</h2>
+      <a href="/dashboard">🏠 Dashboard</a>
+      <a href="/gallery">🖼 Gallery</a>
+      <a href="/gallery/upload">📤 Manage Gallery</a>
+      <a href="/messages">📞 View Messages</a>
+      
+        <a href="/manage-news"> 📰 Manage News </a>
+      </li>
+      <li><a href="/manage-team">💡Manage Team</a></li>
+      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+      <li>
+        <a href="/partner/manage"> 🤝 Partners </a>
+      </li>
+      <a href="/analytics-dashboard">
+    📊 Website Analytics
+</a>
+      <a href="/logout">🚪 Logout</a>
+    </div>
+
+    
+    <div class="main">
+      
+    <h2>Edit Gallery Image</h2>
+<div class="gallery-edit-box">
+  
     <form method="POST" enctype="multipart/form-data">
       <label> Gallery Title </label>
 
@@ -27,7 +51,8 @@
             'static',
             filename='uploads/gallery/' + photo[2]
         ) }}"
-        width="250"
+         width="250"
+         height="400px"
       />
 
       <br /><br />
@@ -45,6 +70,11 @@
 
     <br />
 
-    <a href="{{ url_for('gallery.gallery_manage') }}"> Back to Gallery </a>
+    <a style="background:red;
+      padding: 2px 10px 2px 10px;
+        box-shadow: 0 0 12px black;
+        color: #fdfeff;"  href="{{ url_for('gallery.gallery_manage') }}"> Back to Gallery </a>
+</div>
+    </div>
   </body>
 </html>

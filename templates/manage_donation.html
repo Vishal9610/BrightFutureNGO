@@ -6,8 +6,9 @@
   </head>
 
   <body>
+    
     <div class="sidebar">
-      <h2>Bright Future</h2>
+      <h2> Project Mehar</h2>
       <a href="/dashboard">🏠 Dashboard</a>
       <a href="/gallery">🖼 Gallery</a>
       <a href="/gallery/upload">📤 Manage Gallery</a>
@@ -20,18 +21,23 @@
       <li>
         <a href="/partner/manage"> 🤝 Partners </a>
       </li>
+      <a href="/analytics-dashboard">
+    📊 Website Analytics
+</a>
       <a href="/logout">🚪 Logout</a>
     </div>
+
     
     <div class="main">
       <h1>Dashboard</h1>
       <p>Welcome Admin</p>
 
       <hr />
-
+   <div class="box-donation">
+    
     <h2>Manage Donation</h2>
 
-    <form method="POST" enctype="multipart/form-data">
+    <form class = "box-manageDonation" method="POST" enctype="multipart/form-data">
       <label>UPI ID</label>
 
       <br />
@@ -88,5 +94,6 @@ Current QR Code:
 
       <button>Update</button>
     </form>
+   </div>
   </body>
 </html>

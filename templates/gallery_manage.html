@@ -2,13 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-
+   <link rel="stylesheet" href="../static/css/admin.css">
     <title>Manage Gallery</title>
   </head>
 
   <body>
-    <h1>Manage Gallery</h1>
+    
+    <div class="sidebar">
+      <h2> Project Mehar</h2>
+      <a href="/dashboard">🏠 Dashboard</a>
+      <a href="/gallery">🖼 Gallery</a>
+      <a href="/gallery/upload">📤 Manage Gallery</a>
+      <a href="/messages">📞 View Messages</a>
+      
+        <a href="/manage-news"> 📰 Manage News </a>
+      </li>
+      <li><a href="/manage-team">💡Manage Team</a></li>
+      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+      <li>
+        <a href="/partner/manage"> 🤝 Partners </a>
+      </li>
+      <a href="/analytics-dashboard">
+    📊 Website Analytics
+</a>
+      <a href="/logout">🚪 Logout</a>
+    </div>
 
+    
+    <div class="main">
+      
+    <h1>Manage Gallery</h1>
+    <div class="manage-gallery-box">
+      
     <a href="{{ url_for('gallery.gallery_upload') }}"> Upload New Gallery </a>
 
     <br /><br />
@@ -42,7 +67,7 @@
         <td>{{ photo[1] }}</td>
 
         <td>
-          <a
+          <a class="edit"
             href="{{ url_for(
                 'gallery.gallery_edit',
                 id=photo[0]
@@ -53,7 +78,7 @@
 
           |
 
-          <a
+          <a class= "delete"
             href="{{ url_for(
                     'gallery.gallery_delete',
                     id=photo[0]
@@ -69,5 +94,7 @@
 
       {% endfor %}
     </table>
+    </div>
+    </div>
   </body>
 </html>

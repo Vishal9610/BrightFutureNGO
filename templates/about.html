@@ -2,14 +2,17 @@
 <html lang="en">
   <head>
     <title>About Us</title>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <link rel="stylesheet" href="../static/css/style.css" />
   </head>
 
   <body>
     <!-- Navbar -->
     <nav>
-      <div class="logo">NGO Management System</div>
+      <div class="logo">Project Mehar</div>
 
       <ul>
         <li><a href="/">Home</a></li>
@@ -32,12 +35,12 @@
     <!-- About Section -->
 
     <section class="about-page">
-      <h1>About Bright Future Foundation</h1>
+      <h1>About Project Mehar Foundation</h1>
 
       <br />
 
       <p>
-        Bright Future Foundation is a non-profit organization dedicated to
+        Project Mehar Foundation is a non-profit organization dedicated to
         improving the lives of street children through education. We believe
         that every child deserves the opportunity to learn, grow, and build a
         better future regardless of their financial background.
@@ -99,10 +102,103 @@
       </p>
     </section>
 
-    <!-- Footer -->
+    <!--Footer-->
 
-    <footer>
-      <p>© 2026 Bright Future Foundation | All Rights Reserved</p>
+    <footer class="site-footer">
+      <div class="footer-main">
+        <!-- NGO BRAND -->
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span>💙</span>
+            <h2>Project Mehar</h2>
+          </div>
+
+          <p>
+            Project Mehar is working to provide education, support and better
+            opportunities to underprivileged children and communities.
+          </p>
+          <div class="footer-social">
+            <a
+              href="https://www.instagram.com/project.mehar?igsh=cmEwd3FzemRiaTI4"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- EXPLORE -->
+        <div class="footer-column">
+          <h3>Explore</h3>
+
+          <a href="/">Home</a>
+          <a href="/about">About Us</a>
+          <a href="/programs">Our Programs</a>
+          <a href="/gallery">Gallery</a>
+          <a href="/team">Our Team</a>
+          <a href="/contact">Contact Us</a>
+        </div>
+
+        <!-- OUR INITIATIVES -->
+        <div class="footer-column">
+          <h3>Our Initiatives</h3>
+
+          <a href="/programs">Children Education</a>
+          <a href="/programs">Book Distribution</a>
+
+          <a href="/programs">Career Guidance</a>
+          <a href="/programs">Community Support</a>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="footer-column footer-contact">
+          <h3>Get In Touch</h3>
+
+          <p>📍 India</p>
+
+          <p>📧 project.mehar@gmail.com</p>
+
+          <p>📞 +91 XXXXX XXXXX</p>
+
+          <a href="/contact" class="footer-contact-btn"> Contact Us → </a>
+        </div>
+      </div>
+
+      <!-- DONATION CTA -->
+
+      <div class="footer-cta">
+        <div>
+          <h2>Help Us Build a Brighter Future</h2>
+
+          <p>
+            Your small contribution can help a child learn, grow and dream
+            bigger.
+          </p>
+        </div>
+
+        <a href="/donate" onclick="trackClick('Home', 'Donate')">
+          Donate Now
+        </a>
+      </div>
+
+      <!-- BOTTOM -->
+
+      <div class="footer-bottom">
+        <p>© 2026 <strong> Project Mehar</strong>. All Rights Reserved.</p>
+
+        <div class="footer-policy">
+          <a href="#">Privacy Policy</a>
+
+          <span>|</span>
+
+          <a href="#">Terms & Conditions</a>
+
+          <span>|</span>
+
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

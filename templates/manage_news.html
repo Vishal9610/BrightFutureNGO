@@ -1,15 +1,41 @@
 <!doctype html>
 <html>
   <head>
+    <link rel="stylesheet" href="../static/css/admin.css" />
     <title>Manage News</title>
   </head>
 
   <body>
+    
+    <div class="sidebar">
+      <h2> Project Mehar</h2>
+      <a href="/dashboard">🏠 Dashboard</a>
+      <a href="/gallery">🖼 Gallery</a>
+      <a href="/gallery/upload">📤 Manage Gallery</a>
+      <a href="/messages">📞 View Messages</a>
+      
+        <a href="/manage-news"> 📰 Manage News </a>
+      </li>
+      <li><a href="/manage-team">💡Manage Team</a></li>
+      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+      <li>
+        <a href="/partner/manage"> 🤝 Partners </a>
+      </li>
+      <a href="/analytics-dashboard">
+    📊 Website Analytics
+</a>
+      <a href="/logout">🚪 Logout</a>
+    </div>
+   <div class="main">
+    
     <h2>Manage News</h2>
 
+     <div class="new-box">
+      
     <form method="POST">
       Title
 
+      <br />
       <br />
 
       <input type="text" name="title" required />
@@ -19,6 +45,7 @@
       Description
 
       <br />
+      <br />
 
       <textarea name="description" rows="5" cols="50" required></textarea>
 
@@ -26,6 +53,7 @@
 
       Date
 
+      <br />
       <br />
 
       <input type="date" name="news_date" required />
@@ -62,11 +90,11 @@
         <td>{{ item[3] }}</td>
 
         <td>
-          <a href="/edit-news/{{ item[0] }}">Edit</a>
+          <a class="edit" href="/edit-news/{{ item[0] }}">Edit</a>
 
           |
 
-          <a
+          <a class="delete"
             href="/delete-news/{{ item[0] }}"
             onclick="return confirm('Delete this news?');"
           >
@@ -77,5 +105,7 @@
 
       {% endfor %}
     </table>
+     </div>
+   </div>
   </body>
 </html>

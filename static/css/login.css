@@ -3,19 +3,21 @@ body{
   background:#f5f5f5;
 }
 
-.login{
+.login-container{
   width:350px;
   margin:120px auto;
   background:white;
   padding:30px;
   border-radius:10px;
-  box-shadow:0 0 10px gray;
+  box-shadow:0 0 15px gray;
 }
-.login h2{
-  align-items:"center";
+.login-box h2{
+  text-align:center;
+  text-shadow: #1565C0;
+  box-shadow: 0 0 10px black;
 }
 input{
-  width:100%;
+  width:93%;
   padding:10px;
   margin:10px 0;
 }
@@ -26,4 +28,22 @@ button{
   color:white;
   border:none;
   cursor:pointer;
+}
+a{
+  text-decoration: none;
+  padding: 10px;
+  text-align: center;
+}
+a:hover{
+  color: red;
+}
+button:hover{
+  background-color: aqua;
+  color: black;
+}
+.login a{
+  padding: 10px;
+}
+.back{
+  padding: 10px;
 }

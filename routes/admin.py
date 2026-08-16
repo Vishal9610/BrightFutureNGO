@@ -1,43 +1,433 @@
-from flask import Blueprint, render_template, request, redirect, session, flash
-from werkzeug.utils import secure_filename
+# from flask import Blueprint, render_template, request, redirect, session, flash
+# from werkzeug.utils import secure_filename
+# import os
+# from config import mysql
+import random
 import os
-from config import mysql
+
+from flask import Blueprint, render_template, request, redirect, session, flash
+from flask_mail import Message
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+
+from config import mysql, mail
+
 
 admin_bp = Blueprint("admin", __name__)
 
-# Admin Login
+
+# =========================================================
+# ADMIN LOGIN
+# =========================================================
+
 @admin_bp.route("/admin", methods=["GET", "POST"])
 def admin():
 
     if request.method == "POST":
 
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
+
+        if not username or not password:
+
+            flash("Username and Password are required.")
+
+            return redirect("/admin")
 
         cur = mysql.connection.cursor()
 
         cur.execute(
-            "SELECT * FROM admin WHERE username=%s AND password=%s",
-            (username, password)
+            """
+            SELECT *
+            FROM admin
+            WHERE username=%s
+            """,
+            (username,)
         )
 
-        admin = cur.fetchone()
+        admin_user = cur.fetchone()
 
         cur.close()
 
-        if admin:
+        if admin_user:
 
-            session["admin"] = username
+            stored_password = admin_user[2]
 
-            return redirect("/dashboard")
+            try:
 
-        else:
+                password_correct = check_password_hash(
+                    stored_password,
+                    password
+                )
 
-            flash("Invalid Username or Password")
+            except ValueError:
+
+                # Old plain-text password support
+                password_correct = (
+                    stored_password == password
+                )
+
+            if password_correct:
+
+                session["admin"] = username
+
+                return redirect("/dashboard")
+
+        flash("Invalid Username or Password.")
 
     return render_template("admin_login.html")
 
-# Dashboard
+
+# =========================================================
+# FORGOT USERNAME
+# =========================================================
+
+@admin_bp.route("/forgot-username", methods=["GET", "POST"])
+def forgot_username():
+
+    if request.method == "POST":
+
+        contact = request.form.get("contact", "").strip()
+
+        if not contact:
+
+            flash("Please enter your email or mobile number.")
+
+            return redirect("/forgot-username")
+
+        cur = mysql.connection.cursor()
+
+        cur.execute(
+            """
+            SELECT id, username, email, mobile
+            FROM admin
+            WHERE email=%s OR mobile=%s
+            """,
+            (contact, contact)
+        )
+
+        admin_user = cur.fetchone()
+
+        cur.close()
+
+        if not admin_user:
+
+            flash(
+                "No admin account found with this email or mobile number."
+            )
+
+            return redirect("/forgot-username")
+
+        admin_id = admin_user[0]
+        username = admin_user[1]
+        email = admin_user[2]
+
+        if not email:
+
+            flash(
+                "No email address is registered for this admin account."
+            )
+
+            return redirect("/forgot-username")
+
+        # Generate OTP
+        otp = str(random.randint(100000, 999999))
+
+        session["forgot_username_otp"] = otp
+        session["forgot_username_admin_id"] = admin_id
+        session["forgot_username_value"] = username
+
+        try:
+
+            msg = Message(
+                subject="Bright Future Foundation - Username Recovery",
+                sender=mail.username,
+                recipients=[email]
+            )
+
+            msg.body = f"""
+Hello,
+
+Your Bright Future Foundation username recovery OTP is:
+
+{otp}
+
+This OTP is valid for this recovery session.
+
+If you did not request this, please ignore this email.
+
+Regards,
+Bright Future Foundation
+"""
+
+            mail.send(msg)
+
+            flash("OTP has been sent to your registered email.")
+
+            return redirect("/verify-username-otp")
+
+        except Exception as e:
+
+            print("================================")
+            print("EMAIL ERROR:")
+            print(e)
+            print("================================")
+
+            flash(
+                "Unable to send OTP. Please check Gmail configuration."
+            )
+
+            return redirect("/forgot-username")
+
+    return render_template("forgot_username.html")
+
+
+# =========================================================
+# VERIFY USERNAME OTP
+# =========================================================
+
+@admin_bp.route("/verify-username-otp", methods=["GET", "POST"])
+def verify_username_otp():
+
+    if "forgot_username_otp" not in session:
+
+        return redirect("/forgot-username")
+
+    if request.method == "POST":
+
+        entered_otp = request.form.get("otp", "").strip()
+
+        actual_otp = session.get("forgot_username_otp")
+
+        if entered_otp == actual_otp:
+
+            username = session.get("forgot_username_value")
+
+            session.pop("forgot_username_otp", None)
+            session.pop("forgot_username_admin_id", None)
+            session.pop("forgot_username_value", None)
+
+            return render_template(
+                "username_result.html",
+                username=username
+            )
+
+        flash("Invalid OTP.")
+
+    return render_template("verify_username_otp.html")
+
+
+# =========================================================
+# FORGOT PASSWORD
+# =========================================================
+
+@admin_bp.route("/forgot-password", methods=["GET", "POST"])
+def forgot_password():
+
+    if request.method == "POST":
+
+        contact = request.form.get("contact", "").strip()
+
+        if not contact:
+
+            flash("Please enter your email or mobile number.")
+
+            return redirect("/forgot-password")
+
+        cur = mysql.connection.cursor()
+
+        cur.execute(
+            """
+            SELECT id, username, email, mobile
+            FROM admin
+            WHERE email=%s OR mobile=%s
+            """,
+            (contact, contact)
+        )
+
+        admin_user = cur.fetchone()
+
+        cur.close()
+
+        if not admin_user:
+
+            flash(
+                "No admin account found with this email or mobile number."
+            )
+
+            return redirect("/forgot-password")
+
+        admin_id = admin_user[0]
+        email = admin_user[2]
+
+        if not email:
+
+            flash(
+                "No email address is registered for this admin account."
+            )
+
+            return redirect("/forgot-password")
+
+        # Generate OTP
+        otp = str(random.randint(100000, 999999))
+
+        session["forgot_password_otp"] = otp
+        session["forgot_password_admin_id"] = admin_id
+
+        try:
+
+            msg = Message(
+                subject="Bright Future Foundation - Password Reset",
+                sender=mail.username,
+                recipients=[email]
+            )
+
+            msg.body = f"""
+Hello,
+
+Your password reset OTP is:
+
+{otp}
+
+Use this OTP to reset your admin password.
+
+If you did not request this password reset, please ignore this email.
+
+Regards,
+Bright Future Foundation
+"""
+
+            mail.send(msg)
+
+            flash("OTP has been sent to your registered email.")
+
+            return redirect("/verify-password-otp")
+
+        except Exception as e:
+
+            print("================================")
+            print("EMAIL ERROR:")
+            print(e)
+            print("================================")
+
+            flash(
+                "Unable to send OTP. Please check Gmail configuration."
+            )
+
+            return redirect("/forgot-password")
+
+    return render_template("forgot_password.html")
+
+
+# =========================================================
+# VERIFY PASSWORD OTP
+# =========================================================
+
+@admin_bp.route("/verify-password-otp", methods=["GET", "POST"])
+def verify_password_otp():
+
+    if "forgot_password_otp" not in session:
+
+        return redirect("/forgot-password")
+
+    if request.method == "POST":
+
+        entered_otp = request.form.get("otp", "").strip()
+
+        actual_otp = session.get("forgot_password_otp")
+
+        if entered_otp == actual_otp:
+
+            session["password_otp_verified"] = True
+
+            return redirect("/reset-password")
+
+        flash("Invalid OTP.")
+
+    return render_template("verify_password_otp.html")
+
+
+# =========================================================
+# RESET PASSWORD
+# =========================================================
+
+@admin_bp.route("/reset-password", methods=["GET", "POST"])
+def reset_password():
+
+    if not session.get("password_otp_verified"):
+
+        return redirect("/forgot-password")
+
+    admin_id = session.get("forgot_password_admin_id")
+
+    if not admin_id:
+
+        return redirect("/forgot-password")
+
+    if request.method == "POST":
+
+        new_password = request.form.get("password", "")
+        confirm_password = request.form.get(
+            "confirm_password",
+            ""
+        )
+
+        if not new_password or not confirm_password:
+
+            flash("Please fill both password fields.")
+
+            return redirect("/reset-password")
+
+        if new_password != confirm_password:
+
+            flash("Passwords do not match.")
+
+            return redirect("/reset-password")
+
+        if len(new_password) < 6:
+
+            flash(
+                "Password must contain at least 6 characters."
+            )
+
+            return redirect("/reset-password")
+
+        password_hash = generate_password_hash(
+            new_password
+        )
+
+        cur = mysql.connection.cursor()
+
+        cur.execute(
+            """
+            UPDATE admin
+            SET password=%s
+            WHERE id=%s
+            """,
+            (password_hash, admin_id)
+        )
+
+        mysql.connection.commit()
+
+        cur.close()
+
+        # Clear recovery session
+        session.pop("forgot_password_otp", None)
+        session.pop("forgot_password_admin_id", None)
+        session.pop("password_otp_verified", None)
+
+        flash(
+            "Password reset successfully. Please login."
+        )
+
+        return redirect("/admin")
+
+    return render_template("reset_password.html")
+
+
+# =========================================================
+# DASHBOARD
+# =========================================================
 
 @admin_bp.route("/dashboard")
 def dashboard():
@@ -48,11 +438,9 @@ def dashboard():
 
     cur = mysql.connection.cursor()
 
-    # Count Gallery Images
     cur.execute("SELECT COUNT(*) FROM gallery")
     gallery_count = cur.fetchone()[0]
 
-    # Count Contact Messages
     cur.execute("SELECT COUNT(*) FROM contact")
     message_count = cur.fetchone()[0]
 
@@ -64,7 +452,10 @@ def dashboard():
         message_count=message_count
     )
 
-# Logout
+
+# =========================================================
+# LOGOUT
+# =========================================================
 
 @admin_bp.route("/logout")
 def logout():

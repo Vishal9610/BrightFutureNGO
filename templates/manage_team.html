@@ -1,4 +1,36 @@
-<h2>Manage Team</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../static/css/admin.css" />
+  <title>Manage Team</title>
+</head>
+<body>
+  
+    <div class="sidebar">
+      <h2> Project Mehar</h2>
+      <a href="/dashboard">🏠 Dashboard</a>
+      <a href="/gallery">🖼 Gallery</a>
+      <a href="/gallery/upload">📤 Manage Gallery</a>
+      <a href="/messages">📞 View Messages</a>
+      
+        <a href="/manage-news"> 📰 Manage News </a>
+      </li>
+      <li><a href="/manage-team">💡Manage Team</a></li>
+      <li><a href="/manage-donation">❤️ Manage Donation</a></li>
+      <li>
+        <a href="/partner/manage"> 🤝 Partners </a>
+      </li>
+      <a href="/analytics-dashboard">
+    📊 Website Analytics
+</a>
+      <a href="/logout">🚪 Logout</a>
+    </div>
+
+  <div class="main">
+    
+      <h2>Manage Team</h2>
+
+<div class="team-box">
 
 <form method="POST" enctype="multipart/form-data">
   Name
@@ -38,7 +70,7 @@
 
 <hr />
 
-<table border="1" cellpadding="10">
+<table cellpadding="10">
   <tr>
     <th>Photo</th>
 
@@ -64,11 +96,11 @@
     <td>{{ member[2] }}</td>
 
     <td>
-      <a href="/edit-team/{{ member[0] }}">Edit</a>
+      <a class="edit" href="/edit-team/{{ member[0] }}">Edit</a>
 
       |
 
-      <a
+      <a class="delete"
         href="/delete-team/{{ member[0] }}"
         onclick="return confirm('Delete Member?');"
       >
@@ -79,3 +111,7 @@
 
   {% endfor %}
 </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css') }}"
+    />
+
+    <title>Your Username</title>
+  </head>
+
+  <body>
+    <div class="login-container">
+      <div class="login-box">
+        <h2>Username Found</h2>
+
+        <p>Your username is:</p>
+
+        <h3>{{ username }}</h3>
+
+        <a class = "back" href="{{ url_for('admin.admin') }}"> Go to Login </a>
+      </div>
+    </div>
+  </body>
+</html>
