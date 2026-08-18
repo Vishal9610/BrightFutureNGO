@@ -166,6 +166,14 @@ class Config:
         os.environ.get("MYSQL_PORT", "3306")
     )
 
+    
+# =========================
+# Cloudinary
+# =========================
+CLOUDINARY_CLOUD_NAME = os.environ.get("cypipohx")
+CLOUDINARY_API_KEY = os.environ.get("884271135157468")
+CLOUDINARY_API_SECRET = os.environ.get("fAmH5p6FiM1F9wATItKtZ5WZxew")
+
     # =========================
     # Gallery Upload
     # =========================
@@ -194,10 +202,3 @@ class Config:
         "loveindiabyvishal9616@gmail.com"
     )
 
-
-# =========================
-# Cloudinary
-# =========================
-CLOUDINARY_CLOUD_NAME = os.environ.get("cypipohx")
-CLOUDINARY_API_KEY = os.environ.get("884271135157468")
-CLOUDINARY_API_SECRET = os.environ.get("fAmH5p6FiM1F9wATItKtZ5WZxew")
