@@ -170,9 +170,9 @@ class Config:
 # =========================
 # Cloudinary
 # =========================
-CLOUDINARY_CLOUD_NAME = os.environ.get("cypipohx")
-CLOUDINARY_API_KEY = os.environ.get("884271135157468")
-CLOUDINARY_API_SECRET = os.environ.get("fAmH5p6FiM1F9wATItKtZ5WZxew")
+CLOUDINARY_CLOUD_NAME = os.environ.get( "CLOUDINARY_CLOUD_NAME","cypipohx")
+CLOUDINARY_API_KEY = os.environ.get("CLOUDINARY_API_KEY","884271135157468")
+CLOUDINARY_API_SECRET = os.environ.get("CLOUDINARY_API_SECRET","fAmH5p6FiM1F9wATItKtZ5WZxew")
 
     # =========================
     # Gallery Upload
