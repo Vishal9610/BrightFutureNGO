@@ -46,14 +46,12 @@
 
       <br /><br />
 
-      <img
-        src="{{ url_for(
-            'static',
-            filename='uploads/gallery/' + photo[2]
-        ) }}"
-         width="250"
-         height="400px"
-      />
+     <img
+  src="{{ photo[2] }}"
+  width="250"
+  height="400"
+  alt="{{ photo[1] }}"
+/>
 
       <br /><br />
 

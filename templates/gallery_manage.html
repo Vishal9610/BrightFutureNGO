@@ -55,13 +55,11 @@
         <td>{{ photo[0] }}</td>
 
         <td>
-          <img
-            src="{{ url_for(
-                    'static',
-                    filename='uploads/gallery/' + photo[2]
-                ) }}"
-            width="120"
-          />
+         <img
+  src="{{ photo[2] }}"
+  width="120"
+  alt="{{ photo[1] }}"
+/>
         </td>
 
         <td>{{ photo[1] }}</td>

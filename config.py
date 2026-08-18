@@ -193,3 +193,11 @@ class Config:
         "MAIL_DEFAULT_SENDER",
         "loveindiabyvishal9616@gmail.com"
     )
+
+
+# =========================
+# Cloudinary
+# =========================
+CLOUDINARY_CLOUD_NAME = os.environ.get("cypipohx")
+CLOUDINARY_API_KEY = os.environ.get("884271135157468")
+CLOUDINARY_API_SECRET = os.environ.get("fAmH5p6FiM1F9wATItKtZ5WZxew")
