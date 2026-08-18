@@ -177,27 +177,27 @@ CLOUDINARY_API_SECRET = os.environ.get("fAmH5p6FiM1F9wATItKtZ5WZxew")
     # =========================
     # Gallery Upload
     # =========================
-    UPLOAD_FOLDER = "static/uploads/gallery"
+UPLOAD_FOLDER = "static/uploads/gallery"
 
     # =========================
     # Gmail SMTP
     # =========================
-    MAIL_SERVER = "smtp.gmail.com"
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
-    MAIL_USE_SSL = False
+MAIL_SERVER = "smtp.gmail.com"
+MAIL_PORT = 587
+MAIL_USE_TLS = True
+MAIL_USE_SSL = False
 
-    MAIL_USERNAME = os.environ.get(
+MAIL_USERNAME = os.environ.get(
         "MAIL_USERNAME",
         "loveindiabyvishal9616@gmail.com"
     )
 
-    MAIL_PASSWORD = os.environ.get(
+MAIL_PASSWORD = os.environ.get(
         "MAIL_PASSWORD",
         "xmrfcmwdavhkuddq"
     )
 
-    MAIL_DEFAULT_SENDER = os.environ.get(
+MAIL_DEFAULT_SENDER = os.environ.get(
         "MAIL_DEFAULT_SENDER",
         "loveindiabyvishal9616@gmail.com"
     )
