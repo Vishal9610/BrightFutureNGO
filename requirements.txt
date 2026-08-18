@@ -1,5 +1,5 @@
 Flask
 Flask-MySQLdb
-Werkzeug
+mysqlclient
+Flask-Mail
 gunicorn
-Werkzeug
