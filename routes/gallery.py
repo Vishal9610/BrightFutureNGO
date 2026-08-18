@@ -298,9 +298,9 @@ gallery_bp = Blueprint("gallery", __name__)
 # =====================================================
 
 cloudinary.config(
-    cloud_name=Config.cypipohx,
-    api_key=Config.884271135157468,
-    api_secret=Config.fAmH5p6FiM1F9wATItKtZ5WZxew,
+    cloud_name=Config.CLOUDINARY_CLOUD_NAME,
+    api_key=Config.CLOUDINARY_API_KEY,
+    api_secret=Config.CLOUDINARY_API_SECRET,
     secure=True
 )
 
