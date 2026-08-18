@@ -278,8 +278,10 @@
 
 
 
-
+import os
 from flask import Blueprint, render_template, request, redirect, flash
+from werkzeug.utils import secure_filename
+
 from config import mysql, Config
 from routes.analytics import record_view
 
@@ -296,9 +298,9 @@ gallery_bp = Blueprint("gallery", __name__)
 # =====================================================
 
 cloudinary.config(
-    cloud_name=Config.CLOUDINARY_CLOUD_NAME,
-    api_key=Config.CLOUDINARY_API_KEY,
-    api_secret=Config.CLOUDINARY_API_SECRET,
+    cloud_name=Config.cypipohx,
+    api_key=Config.884271135157468,
+    api_secret=Config.fAmH5p6FiM1F9wATItKtZ5WZxew,
     secure=True
 )
 
